@@ -1,0 +1,14 @@
+#subir archivo
+
+from google.colab import files
+
+uploaded = files.upload()  # Se abrirá un cuadro para seleccionar el archivo CSV
+
+#leer archivo 
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.appName("AnalisisCSV").getOrCreate()
+
+df = spark.read.csv("/content/datos.csv", header=True, inferSchema=True)
+df.show(5)  # Muestra las primeras 5 filas
+
